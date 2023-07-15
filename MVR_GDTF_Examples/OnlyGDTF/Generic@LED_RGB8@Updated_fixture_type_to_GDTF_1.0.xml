@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GDTF DataVersion="1.0">
+    <FixtureType Name="LED RGB8" Description="8Bit RGB LED module with virtual dimmer" ShortName="RGB8" LongName="LED RGB8" Manufacturer="Generic" FixtureTypeID="001B2163-0DFF-0000-902C-C1C702A22246">
+        <AttributeDefinitions>
+            <ActivationGroups>
+                <ActivationGroup Name="ColorRGB" />
+            </ActivationGroups>
+            <FeatureGroups>
+                <FeatureGroup Name="Dimmer" Pretty="Dimmer">
+                    <Feature Name="Dimmer" />
+                </FeatureGroup>
+                <FeatureGroup Name="Color" Pretty="Color">
+                    <Feature Name="RGB" />
+                </FeatureGroup>
+            </FeatureGroups>
+            <Attributes>
+                <Attribute Name="Dimmer" Pretty="Dim" Feature="Dimmer.Dimmer" PhysicalUnit="LuminousIntensity" />
+                <Attribute Name="ColorAdd_R" Pretty="R" ActivationGroup="ColorRGB" Feature="Color.RGB" PhysicalUnit="ColorComponent" Color="0.6401,0.33,21.26" />
+                <Attribute Name="ColorAdd_G" Pretty="G" ActivationGroup="ColorRGB" Feature="Color.RGB" PhysicalUnit="ColorComponent" Color="0.3,0.6,71.52" />
+                <Attribute Name="ColorAdd_B" Pretty="B" ActivationGroup="ColorRGB" Feature="Color.RGB" PhysicalUnit="ColorComponent" Color="0.15,0.06,7.22" />
+            </Attributes>
+        </AttributeDefinitions>
+        <Wheels />
+        <PhysicalDescriptions>
+            <Emitters />
+        </PhysicalDescriptions>
+        <Models>
+            <Model Name="Body" Length="0.250000" Width="0.250000" Height="0.450000" PrimitiveType="Conventional" />
+            <Model Name="Beam" Length="0.200000" Width="0.200000" Height="0.020000" PrimitiveType="Cylinder" />
+        </Models>
+        <Geometries>
+            <Geometry Name="Body" Model="Body" Position="{1.000000,0.000000,0.000000,0.000000}{0.000000,1.000000,0.000000,0.000000}{0.000000,0.000000,1.000000,0.000000}{0.000000,0.000000,0.000000,1.000000}" >
+                <Beam Name="Beam" Model="Beam" Position="{1.000000,0.000000,0.000000,0.000000}{0.000000,1.000000,0.000000,0.000000}{0.000000,0.000000,1.000000,-0.220000}{0.000000,0.000000,0.000000,1.000000}" BeamType="Wash" PowerConsumption="50" LuminousFlux="1000" BeamAngle="40" FieldAngle="50" BeamRadius="0.1" LampType="LED" />
+            </Geometry>
+        </Geometries>
+        <DMXModes>
+            <DMXMode Name="Default" Geometry="Body">
+                <DMXChannels>
+                    <DMXChannel Highlight="255/1" Geometry="Beam">
+                        <LogicalChannel Attribute="Dimmer" Master="Grand">
+                            <ChannelFunction Attribute="Dimmer" DMXFrom="0/1" />
+                        </LogicalChannel>
+                    </DMXChannel>
+                    <DMXChannel Offset="1" Default="255/1" Highlight="255/1" Geometry="Beam">
+                        <LogicalChannel Attribute="ColorAdd_R">
+                            <ChannelFunction Attribute="ColorAdd_R" DMXFrom="0/1" />
+                        </LogicalChannel>
+                    </DMXChannel>
+                    <DMXChannel Offset="2" Default="255/1" Highlight="255/1" Geometry="Beam">
+                        <LogicalChannel Attribute="ColorAdd_G">
+                            <ChannelFunction Attribute="ColorAdd_G" DMXFrom="0/1" />
+                        </LogicalChannel>
+                    </DMXChannel>
+                    <DMXChannel Offset="3" Default="255/1" Highlight="255/1" Geometry="Beam">
+                        <LogicalChannel Attribute="ColorAdd_B">
+                            <ChannelFunction Attribute="ColorAdd_B" DMXFrom="0/1" />
+                        </LogicalChannel>
+                    </DMXChannel>
+                </DMXChannels>
+                <Relations>
+                    <Relation Name="VirtualDimmer" Master="Beam_Dimmer" Follower="Beam_ColorAdd_R.ColorAdd_R.ColorAdd_R 1" Type="Multiply" />
+                    <Relation Name="VirtualDimmer" Master="Beam_Dimmer" Follower="Beam_ColorAdd_G.ColorAdd_G.ColorAdd_G 1" Type="Multiply" />
+                    <Relation Name="VirtualDimmer" Master="Beam_Dimmer" Follower="Beam_ColorAdd_B.ColorAdd_B.ColorAdd_B 1" Type="Multiply" />
+                </Relations>
+            </DMXMode>
+        </DMXModes>
+        <Revisions>
+            <Revision Text="Created fixture type as example for GDTF Share" Date="2018-05-17T15:00:00" UserID="0" />
+            <Revision Text="Updated fixture type according to GDTF 0.86" Date="2018-06-08T11:45:00" UserID="0" />
+            <Revision Text="corrected properties of geometry beam" Date="2018-06-22T14:45:00" UserID="0" />
+            <Revision Text="Updated fixture type according to GDTF 0.87" Date="2018-08-09T11:45:00" UserID="0" />
+            <Revision Text="Updated fixture type according to GDTF 0.88" Date="2018-12-07T17:20:00" UserID="0" />
+            <Revision Text="Updated fixture type to GDTF 1.0, Uploaded to GDTF Share." Date="2019-03-27T16:03:55" UserID="8"/>
+        </Revisions>
+    </FixtureType>
+</GDTF>
